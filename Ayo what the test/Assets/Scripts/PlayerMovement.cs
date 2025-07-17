@@ -6,49 +6,46 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed;
+    public float jumpHeight;
     private Rigidbody rb;
     public PlayerInputActions playerControls;
     private InputAction move;
     private InputAction jump;
     private Vector2 moveDirection = Vector2.zero;
 
-    private void Awake() {
+    private void Awake()
+    {
         playerControls = new PlayerInputActions();
     }
 
     private void OnEnable()
     {
-        move = playerControls.Player.Move;
-        jump = playerControls.Player.Jump;
-        move.Enable();
-        jump.Enable();
+        playerControls.Enable();
     }
 
     private void OnDisable()
     {
-        move.Disable();
-        jump.Disable();
+        playerControls.Disable();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        move = playerControls.Player.Move;
+        jump = playerControls.Player.Jump;
         rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         moveDirection = move.ReadValue<Vector2>();
+        if (playerControls.Player.Jump.triggered && Mathf.Abs(rb.linearVelocity.y) < 0.01f)
+        {
+            rb.AddForce(Vector3.up * rb.mass * jumpHeight, ForceMode.Impulse);
+        }
     }
 
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector3(moveDirection.x * movementSpeed, rb.linearVelocity.y, moveDirection.y * movementSpeed);
-    }
-
-    private void Jump(InputAction.CallbackContext context) {
-        if (context.performed) {
-            rb.AddForce(Vector3.up * rb.mass * 100);
-        }
     }
 }

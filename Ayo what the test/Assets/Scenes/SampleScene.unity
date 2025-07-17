@@ -314,8 +314,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38561398, y: 0.000000016481318, z: -0.000000006888155, w: 0.92266023}
-  m_LocalPosition: {x: -11.52, y: 15.060001, z: -26.439999}
+  m_LocalRotation: {x: 0.35617185, y: -0.00000002106947, z: 0.000000008031022, w: 0.9344205}
+  m_LocalPosition: {x: -11.52, y: 22.2, z: -36.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -458,10 +458,10 @@ PrefabInstance:
       addedObject: {fileID: 1269257420}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56b7bb056fda7704ebc809ab8fea8b05, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1269257421}
+      addedObject: {fileID: 1269257422}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56b7bb056fda7704ebc809ab8fea8b05, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1269257422}
+      addedObject: {fileID: 1269257421}
   m_SourcePrefab: {fileID: 100100000, guid: 56b7bb056fda7704ebc809ab8fea8b05, type: 3}
 --- !u!1 &410087039
 GameObject:
@@ -775,14 +775,14 @@ MonoBehaviour:
   Radius: 10
   Orbits:
     Top:
-      Radius: 4.51
-      Height: 22.2
+      Radius: 16.32
+      Height: 28.5
     Center:
-      Radius: 14.87
-      Height: 15.06
+      Radius: 24.89
+      Height: 22.2
     Bottom:
-      Radius: 4.91
-      Height: 0.1
+      Radius: 17.42
+      Height: 6.33
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
@@ -866,8 +866,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935288280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38561395, y: 0.000000016481316, z: -0.0000000068881523, w: 0.9226603}
-  m_LocalPosition: {x: -11.52, y: 15.060001, z: -26.439999}
+  m_LocalRotation: {x: 0.3561718, y: -0.000000021069466, z: 0.0000000080310185, w: 0.9344205}
+  m_LocalPosition: {x: -11.52, y: 22.2, z: -36.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1233,7 +1233,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1269257421
 CapsuleCollider:

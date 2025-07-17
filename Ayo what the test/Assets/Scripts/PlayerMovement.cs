@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
@@ -38,14 +39,16 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         moveDirection = move.ReadValue<Vector2>();
-        if (playerControls.Player.Jump.triggered && Mathf.Abs(rb.linearVelocity.y) < 0.01f)
-        {
-            rb.AddForce(Vector3.up * rb.mass * jumpHeight, ForceMode.Impulse);
-        }
     }
 
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector3(moveDirection.x * movementSpeed, rb.linearVelocity.y, moveDirection.y * movementSpeed);
+        //transform.LookAt(transform.position + rb.linearVelocity);
+
+        if (playerControls.Player.Jump.triggered && Mathf.Abs(rb.linearVelocity.y) < 0.02f)
+        {
+            rb.AddForce(Vector3.up * rb.mass * jumpHeight, ForceMode.Impulse);
+        }
     }
 }

@@ -42,6 +42,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
+    }
+
+    void FixedUpdate()
+    {
         cameraForward = freeCamera.transform.forward;
         cameraRight = freeCamera.transform.right;
 
@@ -53,12 +58,10 @@ public class PlayerMovement : MonoBehaviour
 
         directionInput = move.ReadValue<Vector2>();
         moveDirection = (directionInput.x * cameraRight) + (directionInput.y * cameraForward);
-        transform.LookAt(new Vector3(moveDirection.x, 0, moveDirection.z) + transform.position);
-    }
-
-    void FixedUpdate()
-    {
+        
         rb.linearVelocity = new Vector3(moveDirection.x * movementSpeed, rb.linearVelocity.y, moveDirection.z * movementSpeed);
+
+        transform.LookAt(new Vector3(moveDirection.x, 0, moveDirection.z) + transform.position);
 
         if (playerControls.Player.Jump.triggered && Mathf.Abs(rb.linearVelocity.y) < 1f)
         {

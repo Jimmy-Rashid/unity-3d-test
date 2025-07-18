@@ -6,13 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject freeCamera;
     public float movementSpeed;
     public float jumpHeight;
     private Rigidbody rb;
     public PlayerInputActions playerControls;
     private InputAction move;
     private InputAction jump;
-    private Vector2 moveDirection = Vector2.zero;
+    private Vector2 directionInput;
+    private Vector3 moveDirection;
+    private Vector3 cameraForward;
+    private Vector3 cameraRight;
 
     private void Awake()
     {
@@ -38,17 +42,27 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        moveDirection = move.ReadValue<Vector2>();
+        cameraForward = freeCamera.transform.forward;
+        cameraRight = freeCamera.transform.right;
+
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        directionInput = move.ReadValue<Vector2>();
+        moveDirection = (directionInput.x * cameraRight) + (directionInput.y * cameraForward);
+        transform.LookAt(new Vector3(moveDirection.x, 0, moveDirection.z) + transform.position);
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(moveDirection.x * movementSpeed, rb.linearVelocity.y, moveDirection.y * movementSpeed);
-        //transform.LookAt(transform.position + rb.linearVelocity);
+        rb.linearVelocity = new Vector3(moveDirection.x * movementSpeed, rb.linearVelocity.y, moveDirection.z * movementSpeed);
 
-        if (playerControls.Player.Jump.triggered && Mathf.Abs(rb.linearVelocity.y) < 0.02f)
+        if (playerControls.Player.Jump.triggered && Mathf.Abs(rb.linearVelocity.y) < 1f)
         {
-            rb.AddForce(Vector3.up * rb.mass * jumpHeight, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
         }
     }
 }
